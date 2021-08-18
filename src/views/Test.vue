@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Autor: yqn
  * @Date: 2021-08-04 11:41:16
- * @LastEditTime: 2021-08-18 10:19:02
+ * @LastEditTime: 2021-08-18 10:26:21
  * @FilePath: \src\views\Test.vue
  * @LastEditors: yqn
 -->
@@ -30,13 +30,14 @@ const store = useStore()
 const { proxy }: any = getCurrentInstance()
 const httpserve = proxy.$api.configInterface.Test
 const helloworld = ref(null)
+
 const change = (val: string) => {
   // 1.类型 2.title，3.content，4，边框颜色，5、自动关闭事件
   Notification("success", "标题", "内容", "red", 5)
   // 请求示例
-  // httpserve.gettest({name:123456,pas:123456}).then(res=>{
-  //   console.log(res)
-  // })
+  httpserve.gettest({name:123456,pas:123456}).then(res=>{
+    console.log(res)
+  })
 }
 const htmlurl = ref("./LabelDesigner/index.html")
 onMounted(() => {
@@ -51,7 +52,6 @@ onMounted(() => {
           next: true,
         },
   }
-  
 })
 </script>
 
