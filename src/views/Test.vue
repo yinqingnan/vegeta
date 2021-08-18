@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Autor: yqn
  * @Date: 2021-08-04 11:41:16
- * @LastEditTime: 2021-08-18 10:53:31
+ * @LastEditTime: 2021-08-18 11:19:22
  * @FilePath: \src\views\Test.vue
  * @LastEditors: yqn
 -->
@@ -35,7 +35,7 @@ const change = (val: string) => {
   // 1.类型 2.title，3.content，4，边框颜色，5、自动关闭事件
   Notification("success", "标题", "内容", "red", 5)
   // 请求示例
-  httpserve.gettest({ name: 123456, pas: 123456 }).then(res => {
+  httpserve.gettest({ name: 123456, pas: 123456 }).then((res: any) => {
     console.log(res)
   })
 }
