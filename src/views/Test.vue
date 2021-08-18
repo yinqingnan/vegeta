@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Autor: yqn
  * @Date: 2021-08-04 11:41:16
- * @LastEditTime: 2021-08-18 11:31:46
+ * @LastEditTime: 2021-08-18 15:21:56
  * @FilePath: \src\views\Test.vue
  * @LastEditors: yqn
 -->
@@ -13,8 +13,8 @@
   </div> -->
 
   <div class="home images" id="viewerjs">
-    <img alt="Vue logo" src="../assets/image/1.jpg" />
-    <img alt="Vue logo" src="../assets/image/2.jpg" />
+    <!-- <img alt="Vue logo" src="../assets/image/1.jpg" /> -->
+    <!-- <img alt="Vue logo" src="../assets/image/2.jpg" /> -->
   </div>
 </template>
 

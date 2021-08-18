@@ -4,36 +4,44 @@
  * @dec: xxxxxxxxxx
 -->
 <template>
-    <div class="bg">
-        <div class="loginbox">
-            <div class="loginbox_header">
-                <img src="../../assets/image/logo.png" alt />
-                <h2>{{ Title }}</h2>
-            </div>
-            <div class="loginbox_body">
-                <a-form 
-                    ref="formRef"
-                    :model="userState" 
-                    autocomplete="off" 
-                    :rules="rules" 
-                    :label-col="Lab.labelCol" 
-                    :wrapper-col="Lab.wrapperCol"
-                >
-                    <a-form-item label="用户名" name="user">
-                        <a-input v-model:value="userState.user" :maxlength="Lab.maxlength" placeholder="请输入用户名"/>
-                    </a-form-item>
-                    <a-form-item label="密码" name="psd">
-                        <a-input v-model:value="userState.psd" :maxlength="Lab.maxlength" type="password" placeholder="请输入密码"/>
-                    </a-form-item>
+  <div class="bg">
+    <div class="loginbox">
+      <div class="loginbox_header">
+        <img src="../../assets/image/logo.png" alt />
+        <h2>{{ Title }}</h2>
+      </div>
+      <div class="loginbox_body">
+        <a-form
+          ref="formRef"
+          :model="userState"
+          autocomplete="off"
+          :rules="rules"
+          :label-col="Lab.labelCol"
+          :wrapper-col="Lab.wrapperCol"
+        >
+          <a-form-item label="用户名" name="user">
+            <a-input
+              v-model:value="userState.user"
+              :maxlength="Lab.maxlength"
+              placeholder="请输入用户名"
+            />
+          </a-form-item>
+          <a-form-item label="密码" name="psd">
+            <a-input
+              v-model:value="userState.psd"
+              :maxlength="Lab.maxlength"
+              type="password"
+              placeholder="请输入密码"
+            />
+          </a-form-item>
 
-                    <a-form-item :wrapper-col="{ span: 19, offset: 5 }">
-                        <a-button type="primary" @click="onSubmit">登录</a-button>
-                    </a-form-item>
-
-                </a-form>
-            </div>
-        </div>
+          <a-form-item :wrapper-col="{ span: 24, offset: 0 }">
+            <a-button type="primary" @click="onSubmit">登录</a-button>
+          </a-form-item>
+        </a-form>
+      </div>
     </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -45,77 +53,76 @@ import { useRouter } from 'vue-router'
 import { getList } from '../../router/setRouter'
 import { list } from '../../router/data'
 
-interface userState{
-    user: string
-    psd: string
+interface userState {
+  user: string
+  psd: string
 }
 export default defineComponent({
-    name: 'Login',
-    setup(){
-        
-        const route = useRouter();
-        const userState: userState = reactive({
-            user: '',
-            psd: ''
-        })
-        const formRef = ref()
-        const rules = {
-            user: [
-                {required: true, message: '请输入用户名', trigger: 'blur'},
-                {pattern: /^[A-Za-z0-9]{6,12}$/ , message: '帐号格式错误，请重新输入', trigger: 'blur'}
-            ],
-            psd: [
-                {required: true, message: '请输入密码', trigger: 'blur'},
-                {pattern: /^[A-Za-z0-9]{6,12}$/ , message: '密码格式错误，请重新输入', trigger: 'blur'}
-            ]
-        }
-        const Title = ref('测试标题')
-        const Lab = reactive(loginForm)
-        const myL = reactive(list)
-        /** 
-         * 点击登录方法
-        */
-        const onSubmit = () => {
-            // formRef.value.validate().then(() => {
-            //     console.log(toRaw(userState));
-            // })
-            const list = [
-                {
-                    path: "/myCS",
-                    name: "myCS",
-                    key: "3",
-                    title: "登录页面",
-                    hidden: false,
-                    allPath: "myCS/myCS.vue",
-                    children: [],
-                    meta: {
-                        icon: null,
-                        keepAlive: false,
-                        key: "3",
-                        permission: [],
-                    },
-                    component: () => import("../myCS/myCS.vue"),
-                }
-            ]
-            // 调用转化方法
-            // const myL2 = getList(myL);
-            // console.log(myL2)
-            // 动态路由添加
-            addRT(list, route)
-            route.push({
-                name: 'myCS'
-            })
-        }
+  name: 'Login',
+  setup() {
 
-        return {
-            Title,
-            userState,
-            rules,
-            Lab,
-            onSubmit,
-            formRef
-        }
+    const route = useRouter();
+    const userState: userState = reactive({
+      user: '',
+      psd: ''
+    })
+    const formRef = ref()
+    const rules = {
+      user: [
+        { required: true, message: '请输入用户名', trigger: 'blur' },
+        { pattern: /^[A-Za-z0-9]{6,12}$/, message: '帐号格式错误，请重新输入', trigger: 'blur' }
+      ],
+      psd: [
+        { required: true, message: '请输入密码', trigger: 'blur' },
+        { pattern: /^[A-Za-z0-9]{6,12}$/, message: '密码格式错误，请重新输入', trigger: 'blur' }
+      ]
     }
+    const Title = ref('测试标题')
+    const Lab = reactive(loginForm)
+    const myL = reactive(list)
+    /** 
+     * 点击登录方法
+    */
+    const onSubmit = () => {
+      // formRef.value.validate().then(() => {
+      //     console.log(toRaw(userState));
+      // })
+      const list = [
+        {
+          path: "/myCS",
+          name: "myCS",
+          key: "3",
+          title: "登录页面",
+          hidden: false,
+          allPath: "myCS/myCS.vue",
+          children: [],
+          meta: {
+            icon: null,
+            keepAlive: false,
+            key: "3",
+            permission: [],
+          },
+          component: () => import("../myCS/myCS.vue"),
+        }
+      ]
+      // 调用转化方法
+      // const myL2 = getList(myL);
+      // console.log(myL2)
+      // 动态路由添加
+      addRT(list, route)
+      route.push({
+        name: 'myCS'
+      })
+    }
+    return {
+      Title,
+      userState,
+      rules,
+      Lab,
+      onSubmit,
+      formRef
+    }
+  }
 })
 </script>
 

@@ -2,7 +2,7 @@
  * @Descripttion:
  * @Autor: yqn
  * @Date: 2021-08-17 14:55:47
- * @LastEditTime: 2021-08-17 15:40:20
+ * @LastEditTime: 2021-08-18 16:49:29
  * @FilePath: \src\http\module\login.ts
  * @LastEditors: yqn
  */
@@ -10,7 +10,6 @@ import { Interceptors, ResultHandle } from "../interceptors";
 export default class Login {
   public axios: any;
   public Res: any;
-
   constructor() {
     this.axios = new Interceptors().getInterceptors();
     this.Res = new ResultHandle();

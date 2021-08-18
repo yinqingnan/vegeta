@@ -2,7 +2,7 @@
  * @Descripttion:
  * @Autor: yqn
  * @Date: 2021-08-04 11:32:02
- * @LastEditTime: 2021-08-18 09:46:26
+ * @LastEditTime: 2021-08-18 16:56:37
  * @FilePath: \src\main.ts
  * @LastEditors: yqn
  */
@@ -29,9 +29,8 @@ import "nprogress/nprogress.css";
 //   showSpinner: false,
 // });
 
+
 // todo 引入图片预览插件
-
-
 const app = createApp(App);
 app.config.globalProperties.$api = new HttpService();
 app
@@ -41,5 +40,4 @@ app
   .use(useTable)
   .use(NProgress)
   .mount("#app");
-
 // NProgress.start();
