@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-11-17 11:08:45
- * @LastEditTime: 2021-08-17 17:37:17
- * @LastEditors: yqn
+ * @LastEditTime: 2021-08-18 10:41:57
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \src\http\interceptors.ts
  */

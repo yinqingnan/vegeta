@@ -2,19 +2,19 @@
  * @Descripttion: 
  * @Autor: yqn
  * @Date: 2021-08-04 11:41:16
- * @LastEditTime: 2021-08-18 11:19:22
+ * @LastEditTime: 2021-08-18 11:31:46
  * @FilePath: \src\views\Test.vue
  * @LastEditors: yqn
 -->
 <template>
   <HelloWorld @emitc="change" ref="helloworld" />
-  <div style="height:100%">
+  <!-- <div style="height:100%">
     <iframe :src="htmlurl" frameborder="0" style="width:100%;height:100%;"></iframe>
-  </div>
+  </div> -->
 
   <div class="home images" id="viewerjs">
-    <img alt="Vue logo" src="../assets/img/1.jpg" />
-    <img alt="Vue logo" src="../assets/img/2.jpg" />
+    <img alt="Vue logo" src="../assets/image/1.jpg" />
+    <img alt="Vue logo" src="../assets/image/2.jpg" />
   </div>
 </template>
 
@@ -44,16 +44,17 @@ onMounted(() => {
   // console.log(store.state.num)  //获取store的值
   // helloworld.value.refresh()   //子组件的方法调用
   // (helloworld as any).value.refresh()
-  new Viewer(document.getElementById('viewerjs') as HTMLElement), {
+  new Viewer(document.getElementById('viewerjs') as HTMLElement),{
     navbar: true,
-    title: true,
-    toolbar: {
-      prev: true,
-      next: true,
-    },
+        title: true,
+        toolbar: {
+          prev: true,
+          next: true,
+        },
   }
 })
 </script>
 
-<style scoped>
+<style>
+
 </style>
