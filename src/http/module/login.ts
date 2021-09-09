@@ -2,9 +2,9 @@
  * @Descripttion:
  * @Autor: yqn
  * @Date: 2021-08-17 14:55:47
- * @LastEditTime: 2021-08-17 15:40:20
+ * @LastEditTime: 2021-08-28 17:23:38
  * @FilePath: \src\http\module\login.ts
- * @LastEditors: yqn
+ * @LastEditors: Please set LastEditors
  */
 import { Interceptors, ResultHandle } from "../interceptors";
 export default class Login {
@@ -25,10 +25,10 @@ export default class Login {
         .get(url, {
           params: body,
         })
-        .then((res) => {
+        .then((res: any) => {
           this.Res.resultHandle(res, resolve);
         })
-        .catch((err: { message }) => {
+        .catch((err: any) => {
           reject(err.message);
         });
     });

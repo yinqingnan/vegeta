@@ -1,7 +1,7 @@
 <!--
  * @author: WRR
  * @Date: 2021-08-17 15:17:05
- * @dec: xxxxxxxxxx
+ * @dec: 登录
 -->
 <template>
     <div class="bg">
@@ -20,10 +20,11 @@
                     :wrapper-col="Lab.wrapperCol"
                 >
                     <a-form-item label="用户名" name="user">
-                        <a-input v-model:value="userState.user" :maxlength="Lab.maxlength" placeholder="请输入用户名"/>
+                        <a-input v-model:value="userState.user" :maxlength="Ltxt.maxlength" placeholder="请输入用户名"/>
                     </a-form-item>
+                    
                     <a-form-item label="密码" name="psd">
-                        <a-input v-model:value="userState.psd" :maxlength="Lab.maxlength" type="password" placeholder="请输入密码"/>
+                        <a-input v-model:value="userState.psd" :maxlength="Ltxt.maxlength" type="password" placeholder="请输入密码"/>
                     </a-form-item>
 
                     <a-form-item :wrapper-col="{ span: 19, offset: 5 }">
@@ -38,23 +39,25 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref, toRaw } from 'vue';
-import { loginForm } from '../../utils/uiConfig'
+import { attributeAll, loginForm } from '../../utils/uiConfig'
 // import { ValidateErrorEntity } from 'ant-design-vue/es/form/interface';
 import { addRT } from '../../router/addRouter'
 import { useRouter } from 'vue-router'
 import { getList } from '../../router/setRouter'
 import { list } from '../../router/data'
-
-interface userState{
+import { UserService } from '../../http2/module/login'
+import { useStore } from '../../store/index'
+import { myRList, indexR } from '../../router/mRouterList'
+interface UserState{
     user: string
     psd: string
 }
 export default defineComponent({
     name: 'Login',
     setup(){
-        
+        const store = useStore();
         const route = useRouter();
-        const userState: userState = reactive({
+        const userState: UserState = reactive({
             user: '',
             psd: ''
         })
@@ -71,39 +74,45 @@ export default defineComponent({
         }
         const Title = ref('测试标题')
         const Lab = reactive(loginForm)
-        const myL = reactive(list)
+        const Ltxt = reactive(attributeAll)
+        const csList = list
         /** 
          * 点击登录方法
         */
-        const onSubmit = () => {
+        const onSubmit = async () => {
+            const obj = {
+                username: '123',
+                password: '456'
+            }
+            const res = await UserService.login(obj)
+            if(res.status == 200) {
+                localStorage.setItem('token', (res.data as any).token)
+            }
+            const res2 = await UserService.getNav()
+            if(res2.status != 200) return
+
             // formRef.value.validate().then(() => {
             //     console.log(toRaw(userState));
             // })
-            const list = [
-                {
-                    path: "/myCS",
-                    name: "myCS",
-                    key: "3",
-                    title: "登录页面",
-                    hidden: false,
-                    allPath: "myCS/myCS.vue",
-                    children: [],
-                    meta: {
-                        icon: null,
-                        keepAlive: false,
-                        key: "3",
-                        permission: [],
-                    },
-                    component: () => import("../myCS/myCS.vue"),
-                }
-            ]
             // 调用转化方法
-            // const myL2 = getList(myL);
-            // console.log(myL2)
+            let routerM: myRList[] = []
+            csList.map(item => {
+                if (item.children == null || item.children.length == 0) {
+                    item.component = item.name + item.path + '.vue'
+                    indexR.key = item.key
+                    indexR.children.push(item);
+                } else {
+                    indexR.children.push(...item.children);
+                }
+            });
+            routerM.push(indexR)
+            localStorage.setItem("list", JSON.stringify(routerM));
+            const myL2 = getList(routerM);
+            store.commit('mLeft/setIsKey', routerM[0].key)
             // 动态路由添加
-            addRT(list, route)
+            addRT(myL2, route)
             route.push({
-                name: 'myCS'
+                path: myL2[0].children[0].path
             })
         }
 
@@ -112,6 +121,7 @@ export default defineComponent({
             userState,
             rules,
             Lab,
+            Ltxt,
             onSubmit,
             formRef
         }

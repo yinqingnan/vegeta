@@ -5,7 +5,6 @@
  */
 import { myRList } from "./mRouterList";
 export function addRT(list: myRList[], route: any) {
-    localStorage.setItem("list", JSON.stringify(list));
     list.map((e) => {
         route.addRoute(e);
     });

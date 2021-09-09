@@ -10,7 +10,6 @@ export interface myRList {
     key: string;
     path: string;
     name: string;
-    allPath: string;
     children: myRList[];
     meta: {
         icon: string | null;
@@ -18,7 +17,7 @@ export interface myRList {
         key: string;
         permission: string[];
     };
-    component: () => Promise<any>;
+    component: any;
 }
 
 
@@ -30,7 +29,6 @@ const routes: myRList[] = [
         key: "1",
         title: "404页面",
         hidden: false,
-        allPath: "404Page/404Page.vue",
         children: [],
         meta: {
             icon: null,
@@ -46,7 +44,6 @@ const routes: myRList[] = [
         key: "2",
         title: "登录页面",
         hidden: false,
-        allPath: "Login/Login.vue",
         children: [],
         meta: {
             icon: null,
@@ -57,5 +54,21 @@ const routes: myRList[] = [
         component: () => import("../views/Login/Login.vue"),
     },
 ];
+
+export const indexR: myRList = {
+    path: "/index",
+    name: "index",
+    key: "1",
+    title: "首页",
+    hidden: false,
+    children: [],
+    meta: {
+        icon: null,
+        keepAlive: false,
+        key: "1",
+        permission: [],
+    },
+    component: "home/home.vue",
+}
 
 export default routes;
