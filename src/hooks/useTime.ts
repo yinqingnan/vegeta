@@ -2,7 +2,7 @@
  * @Descripttion:
  * @Autor: yqn
  * @Date: 2021-09-09 19:33:10
- * @LastEditTime: 2021-09-09 19:33:10
+ * @LastEditTime: 2021-09-10 09:47:47
  * @FilePath: \src\hooks\useTime.ts
  * @LastEditors: yqn
  * @doc:
@@ -13,7 +13,7 @@ import { ref, onMounted, onUnmounted } from "vue"
  * @description 获取本地时间
  */
 export function useTime() {
-	let timer // 定时器
+	let timer: NodeJS.Timeout // 定时器
 	const year = ref(0) // 年份
 	const month = ref(0) // 月份
 	const week = ref("") // 星期几
