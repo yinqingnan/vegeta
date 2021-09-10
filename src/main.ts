@@ -2,7 +2,7 @@
  * @Descripttion:
  * @Autor: yqn
  * @Date: 2021-08-04 11:32:02
- * @LastEditTime: 2021-09-03 15:10:09
+ * @LastEditTime: 2021-09-09 19:21:21
  * @FilePath: \src\main.ts
  * @LastEditors: yqn
  */
@@ -13,7 +13,7 @@ import Router from "./router"
 import store from "./store"
 import { HttpService } from "./http/http"
 
-import { setupNaive } from "@/plugins"
+import { setupNaive, setupDirectives } from "@/plugins"
 
 // 引入表格组件
 import "xe-utils"
@@ -34,8 +34,8 @@ import "nprogress/nprogress.css"
 import { AntdComponents } from "./plugins/antdesign"
 // todo 引入图片预览插件
 export const app = createApp(App)
-setupNaive(app)
-// antd加载所有组件
+setupNaive(app) // antd加载所有组件
+setupDirectives(app) //注入全局指令
 AntdComponents.map((el) => {
 	app.use(el)
 })
