@@ -6,11 +6,12 @@
 import { myRList } from "./mRouterList";
 
 export function getList(routerMap: myRList[], parent?: myRList) {
+    
     // 返回一个map对象
     return routerMap.map((item, i) => {
         const currentRouter = {
             // 路由地址 动态拼接生成如 /dashboard/workplace
-            path: `${(parent && parent.path) || ""}/${item.path}`,
+            path: `${item.path}`,
             // 路由名称
             name: item.name || item.key || "",
             // 该路由对应页面的组件
@@ -21,8 +22,6 @@ export function getList(routerMap: myRList[], parent?: myRList) {
             meta: item.meta,
             // 子级信息
             children: item.children,
-            // 路径信息
-            allPath: item.allPath,
             //唯一值
             key: item.key,
             // 是否隐藏 true隐藏

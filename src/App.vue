@@ -2,12 +2,12 @@
  * @Descripttion: 
  * @Autor: yqn
  * @Date: 2021-08-04 11:32:02
- * @LastEditTime: 2021-08-18 10:22:26
+ * @LastEditTime: 2021-08-25 16:31:09
  * @FilePath: \src\App.vue
- * @LastEditors: yqn
+ * @LastEditors: Please set LastEditors
 -->
 <template>
-  <div style="height:100vh">
+  <div>
     <router-view></router-view>
   </div>
 </template>
@@ -25,8 +25,5 @@ html,
 body {
   height: 100%;
   width: 100%;
-}
-#app {
-  height: 100%;
 }
 </style>
