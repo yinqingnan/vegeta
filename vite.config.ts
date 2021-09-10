@@ -6,10 +6,11 @@
  * @FilePath: \vite.config.ts
  * @LastEditors: Please set LastEditors
  */
-import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
+import { defineConfig } from "vite"
+import vue from "@vitejs/plugin-vue"
+import styleImport from "vite-plugin-style-import"
 // @ts-ignore
-import path = require("path");
+import path = require("path")
 export default defineConfig({
     resolve:{
         alias: {

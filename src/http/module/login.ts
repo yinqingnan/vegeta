@@ -10,7 +10,6 @@ import { Interceptors, ResultHandle } from "../interceptors";
 export default class Login {
   public axios: any;
   public Res: any;
-
   constructor() {
     this.axios = new Interceptors().getInterceptors();
     this.Res = new ResultHandle();

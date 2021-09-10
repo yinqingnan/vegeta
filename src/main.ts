@@ -18,10 +18,11 @@ import "xe-utils";
 import VXETable from "vxe-table";
 import "vxe-table/lib/style.css";
 function useTable(app: App) {
-  app.use(VXETable);
+	app.use(VXETable)
 }
-import NProgress from "nprogress"; // 引入进度条组件及css
-import "nprogress/nprogress.css";
+// 引入进度条组件及css
+import NProgress from "nprogress"
+import "nprogress/nprogress.css"
 import "./style/iconfont.css"
 // NProgress.inc(0.1);
 // NProgress.configure({
@@ -29,7 +30,7 @@ import "./style/iconfont.css"
 //   speed: 100,
 //   showSpinner: false,
 // });
-
+import { AntdComponents } from "./plugins/antdesign"
 // todo 引入图片预览插件
 
 const app = createApp(App);

@@ -27,14 +27,13 @@
                         <a-input v-model:value="userState.psd" :maxlength="Ltxt.maxlength" type="password" placeholder="请输入密码"/>
                     </a-form-item>
 
-                    <a-form-item :wrapper-col="{ span: 19, offset: 5 }">
-                        <a-button type="primary" @click="onSubmit">登录</a-button>
-                    </a-form-item>
-
-                </a-form>
-            </div>
-        </div>
+          <a-form-item :wrapper-col="{ span: 24, offset: 0 }">
+            <a-button type="primary" @click="onSubmit">登录</a-button>
+          </a-form-item>
+        </a-form>
+      </div>
     </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -125,7 +124,25 @@ export default defineComponent({
             onSubmit,
             formRef
         }
+      ]
+      // 调用转化方法
+      // const myL2 = getList(myL);
+      // console.log(myL2)
+      // 动态路由添加
+      addRT(list, route)
+      route.push({
+        name: 'myCS'
+      })
     }
+    return {
+      Title,
+      userState,
+      rules,
+      Lab,
+      onSubmit,
+      formRef
+    }
+  }
 })
 </script>
 
