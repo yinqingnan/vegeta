@@ -5,7 +5,7 @@
 -->
 <template>
     <div class="cBox" id="Breadcrumb">
-        <a-breadcrumb separator="-">
+        <a-breadcrumb separator=">">
             <a-breadcrumb-item class="myFS" :class="{'myTC': !item.isTo, 'myST': item.isTo }" v-for="(item, index) in bRole" :key="index">
                 <a v-if="item.isTo" @click="toPage(item.href)">{{item.title}}</a>
                 <span v-else>{{item.title}}</span>

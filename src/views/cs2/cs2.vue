@@ -377,8 +377,5 @@ export default defineComponent({
         cursor: pointer;
         color: #00B050;
     }
-    .sTit{
-        font-size: 16px;
-        color: #404040;
-    }
+    
 </style>

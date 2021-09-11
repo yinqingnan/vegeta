@@ -29,11 +29,18 @@ export default defineComponent({
 </script>
 
 <style scoped>
+    .HomeBox{
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        width: 100vw;
+    }
     .cBox{
+        margin-top: 50px;
+        height: 100%;
         display: flex;
     }
     .scBox{
-        margin-top: 50px;
         margin-left: 70px;
         width: 100%;
     }

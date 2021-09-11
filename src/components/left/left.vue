@@ -84,7 +84,6 @@ export default defineComponent({
 
 <style scoped>
     .leftM{
-        margin-top: 50px;
         width: 70px;
         border-right: 1px solid #D7DDE4;
         z-index: 99;
