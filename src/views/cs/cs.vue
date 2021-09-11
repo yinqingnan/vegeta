@@ -5,19 +5,35 @@
 -->
 <template>
   <div>cs213</div>
-  <input type="text" v-has="'btnShow1'" value="123">
+
+  <child :name="test" />
+  <button @click="Nameedt">修改propsName</button>
+  <input type="text" v-has="'btnShow1'" value="123" />
 </template>
 
 <script lang="ts">
-import { useStore } from '../../store/index'
-import { defineComponent, computed } from "vue"
+import { useStore } from "../../store/index"
+import { defineComponent, computed , ref } from "vue"
+import child from "./child.vue"
 export default defineComponent({
-    name: 'cs',
-    setup() {
-      const store = useStore()
-      store.commit('mLeft/setToken', 456)
-      let token = computed(() => store.state.mLeft.token);
+  name: "cs",
+  components: {
+    child
+  },
+  setup() {
+    const store = useStore()
+    const test = ref(0)
+    store.commit("mLeft/setToken", 456)
+    let token = computed(() => store.state.mLeft.token)
+    console.log(child)
+    const Nameedt = () => {
+      test.value++
     }
+    return {
+      Nameedt,
+      test
+    }
+  }
 })
 </script>
 

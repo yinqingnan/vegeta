@@ -20,6 +20,7 @@ export const list: myRList[] = [
         },
         component: "home/home.vue",
     },
+   
     {
         path: "/page",
         name: "page",

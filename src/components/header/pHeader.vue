@@ -4,7 +4,7 @@
  * @dec: 详情页面头部
 -->
 <template>
-    <div class="title">
+    <div class="title" id="pHD">
         <div class="left">
             <slot name="left"></slot>
         </div>

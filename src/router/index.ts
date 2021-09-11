@@ -27,6 +27,7 @@ if (List.length > 0) {
 }
 
 Router.beforeEach((to: any, from: any, next: Function) => {
+    console.log(to)
     store.commit('mLeft/setKey', to.meta.key)
     localStorage.setItem('pageP', to.meta.permission.toString())
     //在跳转路由之前，先清除所有的请求
