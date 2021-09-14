@@ -18,7 +18,7 @@
         </div>
         <div class="EAcontent">
             <div class="EAL">
-                <LTree :treeData="treeData">
+                <LTree :treeData="treeData" :searchValue="searchValue" @changeV="changeV">
                     <template v-slot:seach>
                         <a-input class="noInp" v-model:value="searchValue"  placeholder="输入位置名称搜索">
                             <template #prefix>
@@ -68,36 +68,26 @@ export default defineComponent({
         const searchValue = ref<string>('');
         // 树形菜单值
         const treeData = ref<TreeDataItem[]>([
-            {
-                title: '第1',
-                key: '0-0',
-                children: [
-                {
-                    title: '子级1',
-                    key: '0-0-0',
-                    children: [
-                    { title: '1-1', key: '0-0-0-0' },
-                    { title: '1-2', key: '0-0-0-1' },
-                    { title: '1-3', key: '0-0-0-2' },
-                    ],
-                },
-                {
-                    title: '子级2',
-                    key: '0-0-1',
-                    children: [
-                    { title: '2-1', key: '0-0-1-0' },
-                    { title: '2-2', key: '0-0-1-1' },
-                    { title: '2-3', key: '0-0-1-2' },
-                    ],
-                },
-                ],
-            }
+            {title: '第一级', key: '1', children: [
+                {title: '第一级-1', key: '1-1'},
+                {title: '第一级-2', key: '1-2'},
+                {title: '第一级-3', key: '1-3'}
+            ]},
+            {title: '第二级', key: '2', children: [
+                {title: '第二级-1', key: '2-1'},
+                {title: '第二级-2', key: '2-2'},
+                {title: '第二级-3', key: '2-3'}
+            ]},
+            {title: '第三级', key: '3'}
         ]);
-        
+        const changeV = (val: any) => {
+            console.log(val)
+        }
         return {
             bRole,
             searchValue,
             treeData,
+            changeV
         }
     }
 })

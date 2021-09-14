@@ -124,6 +124,7 @@ export const clearPending = () => {
 
 // 请求拦截器
 http.interceptors.request.use((config: AxiosRequestConfig) => {
+  
   removePending(config) // 在请求开始前，对之前的请求做检查取消操作
   addPending(config) // 将当前请求添加到 pending 中
   //获取token，并将其添加至请求头中

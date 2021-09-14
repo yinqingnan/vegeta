@@ -35,9 +35,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue"
+import { defineComponent, ref } from "vue"
 import SearchOutlined from '@ant-design/icons-vue';
-import { ref } from "@vue/reactivity";
+// import { ref } from "@vue/reactivity";
 import { useRouter } from 'vue-router'
 export default defineComponent({
     name: "App",
@@ -57,6 +57,10 @@ export default defineComponent({
                 icon: ''
             },
             {
+                name: "系统设置",
+                icon: ""
+            },
+            {
                 name: '退出',
                 icon: ''
             }
@@ -68,10 +72,18 @@ export default defineComponent({
             btnShow.value = false;
         }
         const btnF = (i: number) => {
-            if(i == 2){
-                route.push({
-                    path: '/'
-                })
+            switch (i) {
+                case 3:
+                    route.push({
+                        path: "/"
+                    })
+                    break
+                case 2:
+                    let token = Math.random().toString(36).slice(10)
+                    window.open(`${(window.gurl as any).SYSTEMSETTINGS_URL}?token = ${token}`)
+                    break
+                default:
+                    break
             }
         }
         return {

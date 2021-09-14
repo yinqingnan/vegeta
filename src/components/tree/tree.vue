@@ -18,23 +18,56 @@
         </div>
         <div class="tree">
             <a-tree
-                :expandedKeys="expandedKeys"
-                :auto-expand-parent="autoExpandParent"
-                :tree-data="treeData"
-                @expand="onExpand"
+            :expandedKeys="expandedKeys"
+            :auto-expand-parent="autoExpandParent"
+            :tree-data="gData"
+            @expand="onExpand"
             >
+                <template #title="{ title }">
+                    <span v-if="title.indexOf(searchValue) > -1">
+                    {{ title.substr(0, title.indexOf(searchValue)) }}
+                    <span style="color: #f50">{{ searchValue }}</span>
+                    {{ title.substr(title.indexOf(searchValue) + searchValue.length) }}
+                    </span>
+                    <span v-else>{{ title }}</span>
+                </template>
             </a-tree>
         </div>
-        <input type="text" v-model="myVal">
     </div>
 </template>
 
 <script lang="ts">
 import { useStore } from '../../store/index'
-import { defineComponent, computed, watch} from "vue"
+import { defineComponent, computed} from "vue"
 import { reactive, ref } from '@vue/reactivity';
 import { TreeDataItem } from 'ant-design-vue/es/tree/Tree';
-// import { watch } from '@vue/runtime-core';
+import { watch } from '@vue/runtime-core';
+
+const dataList: TreeDataItem[] = [];
+const generateList = (data: TreeDataItem[]) => {
+    for (let i = 0; i < data.length; i++) {
+        const node = data[i];
+        const key = node.key;
+        dataList.push({ key, title: key as string });
+        if (node.children) {
+            generateList(node.children);
+        }
+    }
+};
+const getParentKey = (key: string, tree: TreeDataItem[]): string | number | undefined => {
+    let parentKey;
+    for (let i = 0; i < tree.length; i++) {
+        const node = tree[i];
+        if (node.children) {
+            if (node.children.some(item => item.key === key)) {
+                parentKey = node.key;
+            } else if (getParentKey(key, node.children)) {
+                parentKey = getParentKey(key, node.children);
+            }
+        }
+    }
+    return parentKey;
+};
 
 export default defineComponent({
     name: 'lTree',
@@ -44,44 +77,40 @@ export default defineComponent({
             required: true
         },
         searchValue: {
-            type: Object
+            type: String
         }
     },
-    setup(props) {
+    emits: ['changeV'],
+    setup(props, {emit}) {
         const expandedKeys = ref<string[]>([]);
         const autoExpandParent = ref<boolean>(true);
+        const gData = ref<TreeDataItem[]>(props.treeData);
+
         const onExpand = (keys: string[]) => {
             expandedKeys.value = keys;
             autoExpandParent.value = false;
         };
-        const myVal = ref(1);
-
-        const dataList: TreeDataItem[] = [];
-        const getParentKey = (key: string, tree: TreeDataItem[]): string | number | undefined => {
-            let parentKey;
-            for (let i = 0; i < tree.length; i++) {
-                const node = tree[i];
-                if (node.children) {
-                if (node.children.some(item => item.key === key)) {
-                    parentKey = node.key;
-                } else if (getParentKey(key, node.children)) {
-                    parentKey = getParentKey(key, node.children);
+        
+        watch( () => props.searchValue, value => {
+            generateList(props.treeData);
+            const expanded = dataList
+                .map((item: TreeDataItem) => {
+                if ((item.title as string).indexOf(value) > -1) {
+                    return getParentKey(item.key as string, gData.value);
                 }
-                }
-            }
-            return parentKey;
-        };
-
-        watch(() => props.searchValue,(newVal, oldVal) => {
-            console.log(newVal)
-            console.log(oldVal)
-        })
+                return null;
+                })
+                .filter((item, i, self) => item && self.indexOf(item) === i);
+            expandedKeys.value = expanded as string[];
+            emit('changeV', value)
+            autoExpandParent.value = true;
+        });
 
         return {
             expandedKeys,
             autoExpandParent,
-            onExpand,
-            myVal
+            gData,
+            onExpand
         }
     }
 })
