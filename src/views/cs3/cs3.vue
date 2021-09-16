@@ -18,7 +18,7 @@
         </div>
         <div class="EAcontent">
             <div class="EAL">
-                <LTree :treeData="treeData" :searchValue="searchValue" @changeV="changeV">
+                <LTree :treeData="treeData" :searchValue="searchValue" @changeV="changeV" @btnClick="btnClick" @treeClick="treeClick">
                     <template v-slot:seach>
                         <a-input class="noInp" v-model:value="searchValue"  placeholder="输入位置名称搜索">
                             <template #prefix>
@@ -55,7 +55,7 @@ export default defineComponent({
         const bRole: breadCrumb[] = reactive([
             {
                 title: '首页',
-                href: '/cs',
+                href: '/work',
                 isTo: true
             },
             {
@@ -69,25 +69,37 @@ export default defineComponent({
         // 树形菜单值
         const treeData = ref<TreeDataItem[]>([
             {title: '第一级', key: '1', children: [
-                {title: '第一级-1', key: '1-1'},
-                {title: '第一级-2', key: '1-2'},
-                {title: '第一级-3', key: '1-3'}
-            ]},
+                    {title: '你好', key: '1-1', btnList: [{btn:'icon-work', color: 'yellowgreen'},{btn:'icon-work', color: 'yellowgreen'},{btn:'icon-work', color: 'yellowgreen'}]},
+                    {title: '好吗', key: '1-2', btnList: [{btn:'icon-work', color: 'yellowgreen'}]},
+                    {title: '呵呵', key: '1-3', btnList: [{btn:'icon-sanjiao', color: 'yellowgreen'}]}
+                ],
+                btnList: []
+            },
             {title: '第二级', key: '2', children: [
-                {title: '第二级-1', key: '2-1'},
-                {title: '第二级-2', key: '2-2'},
-                {title: '第二级-3', key: '2-3'}
-            ]},
-            {title: '第三级', key: '3'}
+                    {title: '萨达', key: '2-1', btnList: [{btn:'icon-sanjiao', color: 'yellowgreen'}]},
+                    {title: '多撒', key: '2-2', btnList: [{btn:'icon-sanjiao', color: 'yellowgreen'}]},
+                    {title: '是的', key: '2-3', btnList: [{btn:'icon-work', color: 'yellowgreen'}]}
+                ],
+                btnList: []
+            },
+            {title: '第三级', key: '3', children: [], btnList: []}
         ]);
         const changeV = (val: any) => {
+            console.log(val)
+        }
+        const btnClick = (val: number) => {
+            console.log(val)
+        }
+        const treeClick = (val: string[]) => {
             console.log(val)
         }
         return {
             bRole,
             searchValue,
             treeData,
-            changeV
+            changeV,
+            btnClick,
+            treeClick
         }
     }
 })

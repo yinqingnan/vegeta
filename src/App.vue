@@ -2,28 +2,30 @@
  * @Descripttion: 
  * @Autor: yqn
  * @Date: 2021-08-04 11:32:02
- * @LastEditTime: 2021-09-10 15:38:34
+ * @LastEditTime: 2021-09-16 13:46:07
  * @FilePath: \src\App.vue
  * @LastEditors: Please set LastEditors
 -->
 <template>
-  <div class="app">
-    <router-view></router-view>
-  </div>
+  <a-config-provider :locale="zhCN">
+    <div class="app">
+        <router-view></router-view>
+    </div>
+  </a-config-provider>
 </template>
-
-<script lang="ts">
-import { defineComponent } from "vue"
+<script>
+import zhCN from 'ant-design-vue/es/locale/zh_CN';
+import moment from 'moment';
+import 'moment/dist/locale/zh-cn';
+import { defineComponent, ref } from 'vue';
 export default defineComponent({
-  name: "App"
-})
+  setup() {
+    return {
+      zhCN,
+    };
+  },
+});
 </script>
+<style scoped>
 
-<style >
-@import "style/default.less";
-html,
-body {
-    height: 100%;
-    width: 100%;
-}
 </style>

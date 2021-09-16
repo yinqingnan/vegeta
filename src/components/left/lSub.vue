@@ -5,10 +5,10 @@
 -->
 <template>
     <div class="leftS" :style="{'height': myH + 'px'}">
-        <p class="title" :class="'isTO' + sList.key">{{sList.title}}</p>
+        <p class="title" :class="'isTO' + sList.key">{{sList.meta?.title}}</p>
         <div v-for="item in sList.children" :key="item.key" class="subItem" @click="myBack">
             <router-link :to="item.path">
-                <p :class="item.key == isKey ? 'active' : ''">{{item.title}}</p>
+                <p :class="item.key == isKey ? 'active' : ''">{{item.meta.title}}</p>
             </router-link>
         </div>
     </div>

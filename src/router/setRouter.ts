@@ -17,7 +17,7 @@ export function getList(routerMap: myRList[], parent?: myRList) {
             // 该路由对应页面的组件
             component: () => import("../views/" + item.component),
             //标题
-            title: item.title,
+            title: item.meta.title,
             //源信息
             meta: item.meta,
             // 子级信息
@@ -26,6 +26,7 @@ export function getList(routerMap: myRList[], parent?: myRList) {
             key: item.key,
             // 是否隐藏 true隐藏
             hidden: item.hidden,
+            redirect: item.redirect
         };
         // 为了防止出现后端返回结果不规范，处理有可能出现拼接出两个 反斜杠
         currentRouter.path = currentRouter.path.replace("//", "/");

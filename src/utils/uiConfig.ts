@@ -21,6 +21,11 @@ export const modalForm = {
     wrapperCol: { span: 18 },
 };
 
+export const modalHForm = {
+    labelCol: { span: 5 },
+    wrapperCol: { span: 16 },
+};
+
 // 面包屑接口定义
 export interface breadCrumb {
     title: string

@@ -4,13 +4,16 @@
  * @dec: 默认路由
  */
 export interface myRList {
-    title: string;
-    hidden: boolean;
     key: string;
     path: string;
     name: string;
+    hidden: boolean;
     children: myRList[];
+    redirect: string;
     meta: {
+        title: string;
+        block: boolean;
+        parentkey: string;
         icon: string | null;
         keepAlive: boolean;
         key: string;
@@ -26,12 +29,15 @@ const routes: myRList[] = [
         path: "/:pathMatch(.*)",
         name: "404",
         key: "1",
-        title: "404页面",
         hidden: false,
         children: [],
+        redirect: '',
         meta: {
+            title: "404页面",
             icon: null,
             keepAlive: false,
+            block: false,
+            parentkey: '1',
             key: "1",
             permission: [],
         },
@@ -41,12 +47,15 @@ const routes: myRList[] = [
         path: "/",
         name: "Login",
         key: "2",
-        title: "登录页面",
+        redirect: '',
         hidden: false,
         children: [],
         meta: {
+            title: "登录页面",
             icon: null,
             keepAlive: false,
+            block: false,
+            parentkey: '2',
             key: "2",
             permission: [],
         },
@@ -58,13 +67,16 @@ export const indexR: myRList = {
     path: "/index",
     name: "index",
     key: "1",
-    title: "首页",
+    redirect: '',
     hidden: false,
     children: [],
     meta: {
+        title: "首页",
         icon: null,
         keepAlive: false,
         key: "1",
+        block: false,
+        parentkey: '1',
         permission: [],
     },
     component: "home/home.vue",

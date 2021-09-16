@@ -12,6 +12,7 @@
                         <div class="header" :style="{ width: width + 'px'}">
                             <p class="title">{{title}}</p>
                             <div class="r">
+                                <slot name="btn" class="mr10"></slot>
                                 <a-button type="primary" @click="sure">保存</a-button>
                                 <i class="iconfont icon-close" @click="maskClose"></i>
                             </div>

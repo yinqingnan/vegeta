@@ -6,63 +6,92 @@
 import { myRList } from './mRouterList'
 export const list: myRList[] = [
     {
-        path: "/cs",
-        name: "cs",
+        path: "/work",
+        name: "work",
         key: "3",
-        title: "首页",
         hidden: false,
         children: [],
+        redirect: '',
         meta: {
+            title: "工作",
             icon: null,
+            block: false,
+            parentkey: '3',
             keepAlive: false,
             key: "3",
             permission: [],
         },
         component: "home/home.vue",
     },
-   
     {
-        path: "/page",
-        name: "page",
+        path: "/eqMent",
+        name: "eqMent",
         key: "5",
-        title: "测试页面",
+        redirect: '',
         hidden: false,
         children: [
             {
-                path: "/cs2",
-                name: "cs2",
+                path: "/sbook",
+                name: "sbook",
                 key: "6",
-                title: "角色管理",
                 hidden: false,
+                redirect: '',
                 children: [],
                 meta: {
+                    title: "台账",
                     icon: null,
                     keepAlive: false,
+                    block: false,
+                    parentkey: '5',
                     key: "6",
                     permission: ['imageShow'],
                 },
-                component: "cs2/cs2.vue"
+                component: "eqMent/sbook.vue"
             },
             {
-                path: "/cs3",
-                name: "cs3",
+                path: "/region",
+                name: "region",
                 key: "7",
-                title: "测试页面三",
+                redirect: '',
                 hidden: false,
                 children: [],
                 meta: {
+                    title: "区域",
                     icon: null,
                     keepAlive: false,
                     key: "7",
+                    block: false,
+                    parentkey: '5',
                     permission: ['txtShow'],
                 },
-                component: "cs3/cs3.vue"
+                component: "eqMent/region.vue"
+            },
+            {
+                path: "/sort",
+                name: "sort",
+                key: "8",
+                redirect: '',
+                hidden: false,
+                children: [],
+                meta: {
+                    title: "分类",
+                    icon: null,
+                    keepAlive: false,
+                    key: "8",
+                    block: false,
+                    parentkey: '5',
+                    permission: ['txtShow'],
+                },
+                component: "eqMent/sort.vue"
             }
         ],
         meta: {
+            title: "设备",
             icon: null,
             keepAlive: false,
             key: "5",
+            block: false,
+            parentkey: '5',
             permission: [],
         },
         component: "home/home.vue",
