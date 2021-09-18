@@ -6,11 +6,14 @@
 <template>
     <div class="leftS" :style="{'height': myH + 'px'}">
         <p class="title" :class="'isTO' + sList.key">{{sList.meta?.title}}</p>
-        <div v-for="item in sList.children" :key="item.key" class="subItem" @click="myBack">
-            <router-link :to="item.path">
-                <p :class="item.key == isKey ? 'active' : ''">{{item.meta.title}}</p>
-            </router-link>
+        <div v-for="item in sList.children" :key="item.key">
+            <div class="subItem" @click="myBack" v-if="!item.hidden">
+                <router-link :to="item.path">
+                    <p :class="item.key == isKey ? 'active' : ''">{{item.meta.title}}</p>
+                </router-link>
+            </div>
         </div>
+        
     </div>
 </template>
 

@@ -142,7 +142,7 @@
                 <div class="tBox" :style="{ height: myHeight + 'px'}">
                     <vxe-grid v-bind="gridOptions" auto-resize class="changeS" v-show="isI == 0">
                         <template #eqptName="{ row }">
-                            <div class="wrap wrapP colB">
+                            <div class="wrap wrapP colB" @click="goTOD(row.id)">
                                 <p>{{row.eqptName}}</p>
                                 <p>{{row.code}}</p>
                             </div>
@@ -201,7 +201,7 @@
                     >
                     </vxe-pager>
                     <div class="card" v-show="isI == 1">
-                        <div class="cItem" v-for="item in gridOptions.data" :key="item.id">
+                        <div class="cItem" v-for="item in gridOptions.data" :key="item.id" @click="goTOD(item.id)">
                             <div class="cT">
                                 <p>{{item.locationName}}</p>
                                 <span class="iconfont icon-alert" v-show="item.eqptHealthyState == '2'"></span>
@@ -275,7 +275,7 @@
                     <a-col :span="12" :push="0">
                         <a-form-item label="分类" name="eqptCategoryId">
                             <a-select v-model:value="newData.newF.eqptCategoryId" placeholder="请选择分类">
-                                <a-select-option :value="item.value" v-for="item in sList" :key="item.value">{{item.label}}</a-select-option>
+                                <a-select-option :value="item.value" v-for="item in newData.fList" :key="item.value">{{item.label}}</a-select-option>
                             </a-select>
                         </a-form-item>
                     </a-col>
@@ -283,7 +283,7 @@
                     <a-col :span="12" :push="0">
                         <a-form-item label="等级" name="eqptLevel">
                             <a-select v-model:value="newData.newF.eqptLevel" placeholder="请选择等级">
-                                <a-select-option :value="item.value" v-for="item in sList" :key="item.value">{{item.label}}</a-select-option>
+                                <a-select-option :value="item.value" v-for="item in newData.dList" :key="item.value">{{item.label}}</a-select-option>
                             </a-select>
                         </a-form-item>
                     </a-col>
@@ -291,7 +291,7 @@
                     <a-col :span="12" :push="0">
                         <a-form-item label="使用状态" name="useState">
                             <a-select v-model:value="newData.newF.useState" placeholder="请选择使用状态">
-                                <a-select-option :value="item.value" v-for="item in sList" :key="item.value">{{item.label}}</a-select-option>
+                                <a-select-option :value="item.value" v-for="item in newData.uList" :key="item.value">{{item.label}}</a-select-option>
                             </a-select>
                         </a-form-item>
                     </a-col>
@@ -299,7 +299,7 @@
                     <a-col :span="12" :push="0">
                         <a-form-item label="运行状态" name="runState">
                             <a-select v-model:value="newData.newF.runState" placeholder="请选择运行状态">
-                                <a-select-option :value="item.value" v-for="item in sList" :key="item.value">{{item.label}}</a-select-option>
+                                <a-select-option :value="item.value" v-for="item in newData.rList" :key="item.value">{{item.label}}</a-select-option>
                             </a-select>
                         </a-form-item>
                     </a-col>
@@ -311,16 +311,16 @@
 
                     <a-col :span="12" :push="0">
                         <a-form-item label="所属部门" name="belongingDeptId">
-                            <a-select v-model:value="newData.newF.belongingDeptId" placeholder="请选择运行状态">
-                                <a-select-option :value="item.value" v-for="item in sList" :key="item.value">{{item.label}}</a-select-option>
+                            <a-select v-model:value="newData.newF.belongingDeptId" placeholder="请选择所属部门">
+                                <a-select-option :value="item.value" v-for="item in beDept" :key="item.value">{{item.label}}</a-select-option>
                             </a-select>
                         </a-form-item>
                     </a-col>
 
                     <a-col :span="12" :push="0">
                         <a-form-item label="使用部门" name="useDeptId">
-                            <a-select v-model:value="newData.newF.useDeptId" placeholder="请选择运行状态">
-                                <a-select-option :value="item.value" v-for="item in sList" :key="item.value">{{item.label}}</a-select-option>
+                            <a-select v-model:value="newData.newF.useDeptId" placeholder="请选择使用部门">
+                                <a-select-option :value="item.value" v-for="item in useDept" :key="item.value">{{item.label}}</a-select-option>
                             </a-select>
                         </a-form-item>
                     </a-col>
@@ -328,7 +328,7 @@
                     <a-col :span="12" :push="0">
                         <a-form-item label="区域" name="eqptLocationId">
                             <a-select v-model:value="newData.newF.eqptLocationId" placeholder="请选择区域">
-                                <a-select-option :value="item.value" v-for="item in sList" :key="item.value">{{item.label}}</a-select-option>
+                                <a-select-option :value="item.value" v-for="item in newData.qList" :key="item.value">{{item.label}}</a-select-option>
                             </a-select>
                         </a-form-item>
                     </a-col>
@@ -423,6 +423,8 @@ import { onMounted } from "@vue/runtime-core"
 import { VxeGridProps, VxePagerEvents  } from 'vxe-table'
 import { attributeAll, modalHForm } from '../../utils/uiConfig'
 import { regionService, sBookType } from '../../http2/module/region'
+import { useRouter } from 'vue-router'
+import axios from 'axios'
 // 导入模块
 import {newData, open, mChange2, getText2, inpBack, fileList, imgChange, formRef2, isClose, newType } from './module/sBook'
 interface dataType {
@@ -471,6 +473,7 @@ export default defineComponent({
         THeader
     },
     setup(){
+        const route = useRouter();
         const http = window.gurl.SERVICE_CONTEXT_PATH + '/base/file/upload'
         // 全局属性
         const Ltxt = reactive(attributeAll);
@@ -902,7 +905,7 @@ export default defineComponent({
                 obj.locationId = '';
             }
             var that = this;
-            axios.get("/eam/eqpt/export", obj, { responseType: 'arraybuffer' }).then(res => {
+            axios.get(window.gurl.SERVICE_CONTEXT_PATH + "/eam/eqpt/export", obj, { responseType: 'arraybuffer' }).then((res: any) => {
                 if (res) {
                     const aLink = document.createElement("a");
                     let blob = new Blob([res.data], {type: "application/vnd.ms-excel"})
@@ -912,6 +915,12 @@ export default defineComponent({
                     aLink.click();
                 }
             });
+        }
+
+        const goTOD = (id: number) => {
+            route.push({
+                path: '/sbookD/' + id
+            })
         }
         return {
             bRole,
@@ -950,7 +959,8 @@ export default defineComponent({
             http,
             imgChange,
             isClose,
-            isOK
+            isOK,
+            goTOD
         }
     }
 })

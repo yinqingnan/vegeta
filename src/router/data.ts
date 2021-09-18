@@ -83,7 +83,25 @@ export const list: myRList[] = [
                     permission: ['txtShow'],
                 },
                 component: "eqMent/sort.vue"
-            }
+            },
+            {
+                path: "/sbookD/:id",
+                name: "sbookD",
+                key: "6",
+                hidden: true,
+                redirect: '',
+                children: [],
+                meta: {
+                    title: "台账详情",
+                    icon: null,
+                    keepAlive: false,
+                    block: false,
+                    parentkey: '5',
+                    key: "6",
+                    permission: ['imageShow'],
+                },
+                component: "eqMent/sbookD.vue"
+            },
         ],
         meta: {
             title: "设备",

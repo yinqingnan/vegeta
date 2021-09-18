@@ -54,6 +54,11 @@ interface optionType {
     manufactorTypeEqual: string
 }
 
+export interface resumeType {
+    id: number;
+    type: string;
+}
+
 export interface sBookType {
     page?: number;
     size?: number;
@@ -71,7 +76,10 @@ export interface sBookType {
     eqptNameLike?: string;
     eqptCodeLikes?: string;
 }
-
+interface changeTy {
+    id: number;
+    state: string;
+}
 interface getT {}
 //封装User类型的接口方法
 export class regionService {
@@ -88,7 +96,7 @@ export class regionService {
             },
         })
     }
-    // 下拉数据
+    // 下拉数据 数据字典
     static async getSelect(params: select): Promise<HttpResponse> {
         let url = '/base/dict/data/' + params.code
         return http(url, {
@@ -244,6 +252,71 @@ export class regionService {
             },
         })
     }
+
+    /**
+     * 设备详情
+     */
+    static async getEqpt(params: number): Promise<HttpResponse> {
+        return http('/eam/eqpt/' + params, {
+            method: 'get',
+            responseType: 'json',
+            params: {},
+        })
+    }
+    // 获取履历数据
+    static async getResume(params: resumeType): Promise<HttpResponse> {
+        return http('/eam/eqpt/resume/' + params.id, {
+            method: 'get',
+            responseType: 'json',
+            params: {},
+        })
+    }
+    // 获取策略
+    static async getStrategy(params: resumeType): Promise<HttpResponse> {
+        return http('/eam/strategy/'+ params.type +'/' + params.id, {
+            method: 'get',
+            responseType: 'json',
+            params: {},
+        })
+    }
+
+    static async getJournal(params: resumeType): Promise<HttpResponse> {
+        return http('/eam/strategy/'+ params.type +'/' + params.id, {
+            method: 'get',
+            responseType: 'json',
+            params: {},
+        })
+    }
+    // 修改状态
+    static async setuseState(params: changeTy): Promise<HttpResponse> {
+        return http('/eam/eqpt/useState/' + params.id, {
+            method: 'PUT',
+            responseType: 'json',
+            params: {
+                ...params
+            },
+        })
+    }
+    // 删除
+    static async dltEqpt(params: Number): Promise<HttpResponse> {
+        return http('/eam/eqpt/useState/' + params, {
+            method: 'DELETE',
+            responseType: 'json',
+            params: {},
+        })
+    }
+    // 编辑
+    static async putDept(params: any): Promise<HttpResponse> {
+        return http('/eam/eqpt/' + params.id, {
+            method: 'PUT',
+            responseType: 'json',
+            params: {
+                ...params
+            },
+        })
+    }
+
+    
 
     
     

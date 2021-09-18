@@ -31,6 +31,7 @@ export default defineComponent({
         align-items: center;
         justify-content: space-between;
         background: #F2F4F7;
+        border-top: 1px solid #D7DDE4;
     }
     .left{
         margin-left: 15px;

@@ -102,40 +102,40 @@ const newData = reactive<newFType>({
     visible: false,
     myTitle: '新增设备区域',
     rules: {
-        // code: [
-        //     { required: true, message: '编号必填', trigger: '' },
-        //     {pattern: /^[a-zA-Z]*$/, message: '只能输入字母', trigger: 'blur'}
-        // ],
-        // manufactorName: [
-        //     { required: true, message: '厂家必填', trigger: '' },
-        // ],
-        // specsName: [
-        //     { required: true, message: '型号必填', trigger: '' },
-        // ],
-        // eqptCategoryId: [
-        //     { required: true, message: '类别必填', trigger: '' },
-        // ],
-        // eqptLevel: [
-        //     { required: true, message: '等级必填', trigger: '' },
-        // ],
-        // belongingDeptId: [
-        //     { required: true, message: '所属部门必填', trigger: '' },
-        // ],
-        // useDeptId: [
-        //     { required: true, message: '使用部门必填', trigger: '' },
-        // ],
-        // eqptLocationId: [
-        //     { required: true, message: '区域必填', trigger: '' },
-        // ],
-        // useState: [
-        //     { required: true, message: '使用状态必填', trigger: '' },
-        // ],
-        // runState: [
-        //     { required: true, message: '运行状态必填', trigger: '' },
-        // ],
-        // eqptSource: [
-        //     { required: true, message: '来源必填', trigger: '' },
-        // ],
+        code: [
+            { required: true, message: '编号必填', trigger: '' },
+            {pattern: /^[a-zA-Z]*$/, message: '只能输入字母', trigger: 'blur'}
+        ],
+        manufactorName: [
+            { required: true, message: '厂家必填', trigger: '' },
+        ],
+        specsName: [
+            { required: true, message: '型号必填', trigger: '' },
+        ],
+        eqptCategoryId: [
+            { required: true, message: '类别必填', trigger: '' },
+        ],
+        eqptLevel: [
+            { required: true, message: '等级必填', trigger: '' },
+        ],
+        belongingDeptId: [
+            { required: true, message: '所属部门必填', trigger: '' },
+        ],
+        useDeptId: [
+            { required: true, message: '使用部门必填', trigger: '' },
+        ],
+        eqptLocationId: [
+            { required: true, message: '区域必填', trigger: '' },
+        ],
+        useState: [
+            { required: true, message: '使用状态必填', trigger: '' },
+        ],
+        runState: [
+            { required: true, message: '运行状态必填', trigger: '' },
+        ],
+        eqptSource: [
+            { required: true, message: '来源必填', trigger: '' },
+        ],
     },
     isM: false,
     isS: false,
